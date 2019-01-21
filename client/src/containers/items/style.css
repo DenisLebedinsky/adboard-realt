@@ -1,0 +1,8 @@
+.item_card_container {
+  margin-top: 10px;
+}
+
+.item_card {
+  height: 100%;
+  box-shadow: 1px 1px 5px;
+}

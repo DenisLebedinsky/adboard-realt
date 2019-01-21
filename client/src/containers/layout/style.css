@@ -1,0 +1,8 @@
+.floatBtn {
+  position: fixed;
+  top: 87%;
+  left: 81%;
+}
+.floatBtn button:focus {
+  outline: none -webkit-focus-ring-color;
+}

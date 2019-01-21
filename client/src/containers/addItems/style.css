@@ -1,0 +1,90 @@
+.add_item_container {
+  padding-top: 30px;
+}
+
+.file-upload {
+  top: 2px;
+  margin: 2px;
+  position: relative; /* Даем возможность делать позиционирование, внутри данного элемента */
+  overflow: hidden; /* Все что выходит за пределы - скрываем */
+  max-width: 330px; /* Задаем ширину кнопки выбора файла */
+  min-width: 100px;
+  height: 179px; /* Задаем высоту кнопки выбора файла */
+  border-radius: 3px;
+  /* padding: 8px 4px;*/
+  color: #000;
+  /*    text-align: center;*/
+  box-shadow: 0px 1px 10px #000;
+}
+
+.fileInput__lable:hover {
+  background: #dddddd;
+  box-shadow: inset 0px 1px 10px #000;
+  background-image: url('/images/plus.png');
+  background-size: 100px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.fileDel__lable:hover {
+  background: #dddddd;
+  box-shadow: inset 0px 1px 10px #000;
+  background-image: url('/images/minus.png');
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.file-upload input[type='file'] {
+  display: none; /* Обязательно скрываем настоящий Input File */
+}
+
+.fileInput__lable {
+  /* Растягиваем label на всю возможную площадь блока .file-upload */
+
+  position: inherit;
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 100%;
+  cursor: pointer;
+  background-image: url('/images/plus.png');
+  background-size: 100px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.fileDel__lable {
+  height: 100%;
+  position: inherit;
+  width: 20%;
+  left: 0;
+  cursor: pointer;
+  background-image: url('/images/minus.png');
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.fileDel {
+  display: none;
+}
+
+.file-upload span {
+  line-height: 36px; /* Делаем вертикальное выравнивание текста, который написан на кнопке */
+}
+
+#successAddItems {
+  margin-top: 10px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+@media (max-width: 480px) {
+  .file-upload {
+    height: 80px;
+    max-width: 100%;
+  }
+}
