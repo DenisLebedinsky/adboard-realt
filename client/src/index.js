@@ -18,7 +18,7 @@ import AddItems from './containers/addItems';
 import EditItems from './containers/editItem';
 import Signin from './containers/auth';
 import NavBar from './containers/navBar';
-import Lending from './containers/lending';
+import Lending from './components/lending';
 
 const store = createStore(
   reducers,

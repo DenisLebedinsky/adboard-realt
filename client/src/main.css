@@ -1,4 +1,4 @@
-#page-preloader {
+service__list-group__li#page-preloader {
   position: fixed;
   left: 0;
   top: 0;
@@ -649,9 +649,10 @@ footer {
 
 .gerb {
   background-image: url(/images/gerb_3.png);
-  height: 620px;
+  height: 70vh;
   width: 700px;
-  background-repeat: no-repeat;
+  background-position: center;
+    background-repeat: no-repeat;
   background-size: contain;
   margin-top: 50px;
   margin-bottom: 100px;
@@ -691,25 +692,42 @@ footer {
 
 .block_serviceList_group span {
   font-size: 20px;
-  text-align: left;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.block_serviceList_group .service__footer{
+    font-size: 15px;
+}
+
+.list-group_price{
+    font-size: 15px;
+    width: 30%;
+    text-align: center;
+}
+.list-group_data{
+    width: 65%;
+    text-align: left;
 }
 
 .list_price {
-  margin-right: 30px;
+  margin-right: 15%;
+    text-align: center;
 }
 
 .service_h2 {
-  text-shadow: 1px 1px #f1bf27;
+  text-shadow: 3px 2px 2px rgba(3,3,3, 0.3);
   color: #000;
 }
 
 .block_serviceList_group .service__title {
   color: #000;
+  text-shadow: 3px 2px 2px rgba(3,3,3, 0.3);
   font-size: 30px;
 }
 
 .service__footer {
-  color: #c9a410;
+  color: #212529;
+  font-size: 10px;
 }
 
 nav {
@@ -765,8 +783,9 @@ svg {
   color: #001a00;
 }
 
-.service__list-group__name {
+.service__list-group__name  span{
   color: #c9a410;
+  font-family: 'cyrillicold', serif;
 }
 
 .footer i {
@@ -799,6 +818,12 @@ svg {
     background-color: #004d00;
 }
 
+@media screen and (max-width: 600px) {
+    .nav-link{
+        font-size: 14px;
+        text-align: center;
+    }
+}
 /*------------------- ШРИФТЫ -------------------------*/
 
 @font-face {

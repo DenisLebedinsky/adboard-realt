@@ -9,8 +9,8 @@ class NavBar extends Component {
     return (
       <div>
         <nav className="navbar fixed-top animated slideInDown">
-          <div className="container">
-            <ul className="navbar-nav ml-auto sm-ml-auto d-flex flex-row">
+          <div className="container d-flex justify-content-center">
+            <ul className="navbar-nav d-flex flex-row">
               <li className="nav-item ml-4">
                 <Link className="nav-link" to="/">
                   Главная

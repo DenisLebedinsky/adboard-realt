@@ -37,8 +37,8 @@ class ListGroupService extends Component {
                     className="list-group-item d-flex justify-content-between service__list-group__li"
                     key={Math.floor(Math.random() * 100) + data.name}
                   >
-                    <span>{data.name}</span>
-                    <span>{data.price}</span>
+                    <span className="list-group_data">{data.name}</span>
+                    <span className="list-group_price">{data.price}</span>
                   </li>
                 );
               })}
