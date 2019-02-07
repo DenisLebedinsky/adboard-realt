@@ -22,7 +22,7 @@ router.post('/',ensureAuthorized, function(req, res, next) {
  category.save(function (err, category, affected) {
      if (err) throw err;
      res.statusCode = 200;
-     res.send({  error: 'ok' });
+     res.send('ok' );
  });
 
 });
@@ -36,7 +36,7 @@ router.delete('/', ensureAuthorized, function (req, res, next) {
         if (data != undefined){
             data.remove();
             res.statusCode = 200;
-            res.send({  error: 'ok' });
+            res.send('ok');
         }else{
             res.statusCode = 400;
             res.send({ error: 'Validation error' });

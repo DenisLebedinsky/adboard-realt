@@ -123,7 +123,6 @@ export const dellItemApi = async (id, token) => {
 export const chekingItemApi = async (id, token) => {
   let data = new FormData();
   data.append('id', id);
-  console.log(token);
   const config = {
     headers: {
       'content-type': 'multipart/form-data',
@@ -131,4 +130,31 @@ export const chekingItemApi = async (id, token) => {
     },
   };
   axios.patch('/house/changestatus', data, config);
+};
+
+export const categoryAddApi = async (category, token) => {
+  let data = new FormData();
+  data.append('id', category.id);
+  data.append('id', category.name);
+  
+  const config = {
+    headers: {
+      'content-type': 'multipart/form-data',
+      authorization: token,
+    },
+  };
+  axios.post('/category', data, config);
+};
+
+export const categoryDeleteApi = async (id, token) => {
+  let data = new FormData();
+  data.append('id', id);
+  
+  const config = {
+    headers: {
+      'content-type': 'multipart/form-data',
+      authorization: token,
+    },
+  };
+  axios.delete('/category', data, config);
 };

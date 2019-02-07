@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import OneCheckItem from './OneCheckItem';
 import { fetchItemsCheck } from './../../actions';
 import { getcheckItems, getToken } from './../../selectors';
+import EditCategory from './../Editcategory';
 
 class Check extends Component {
   componentDidMount() {
@@ -19,7 +20,9 @@ class Check extends Component {
           ))}
         </div>
         <div className="row">
-          <div className="col-md-12" />
+          <div className="col-md-12">
+              <EditCategory />
+          </div>
         </div>
       </div>
     );
