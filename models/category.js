@@ -15,8 +15,8 @@ const schema = new Schema({
 });
 
 schema.statics.findOnList = function(id, callback){
-    let house = this;
-    house.findOne({_id:id}, callback);
+    let category = this;
+    category.findOne({id:id}, callback);
 };
 
 schema.statics.findall = function(callback){

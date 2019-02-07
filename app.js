@@ -11,10 +11,6 @@ var createError = require('http-errors'),
     checkRouter = require('./routes/houseCheck'),
     categoryRouter = require('./routes/category'),
     serviceRouter = require('./routes/service'),
-    mongoose = require('mongoose'),
-    session = require('express-session'),
-    MongoStore = require('connect-mongo')(session),
-    config = require('./config'),
     app = express();
 
 app.use(logger('dev'));
@@ -24,7 +20,6 @@ app.set('view engine', 'pug');
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
-//app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -36,17 +31,6 @@ app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
     next();
 });
-
-/*app.use(session({
-    secret:config.get('session:secret'),
-    key:config.get('session:key'),
-    resave: true,
-    saveUninitialized: true,
-    cookie:config.get('session:cookie'),
-
-    store: new MongoStore({mongooseConnection: mongoose.connection})
-}));
-*/
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
