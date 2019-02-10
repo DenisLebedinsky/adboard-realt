@@ -136,7 +136,7 @@ export const categoryAddApi = async (category, token) => {
   let data = new FormData();
   data.append('id', category.id);
   data.append('id', category.name);
-  
+
   const config = {
     headers: {
       'content-type': 'multipart/form-data',
@@ -149,7 +149,21 @@ export const categoryAddApi = async (category, token) => {
 export const categoryDeleteApi = async (id, token) => {
   let data = new FormData();
   data.append('id', id);
-  
+
+  const config = {
+    headers: {
+      'content-type': 'multipart/form-data',
+      authorization: token,
+    },
+  };
+  axios.delete('/category', data, config);
+};
+
+export const categoryUpdateApi = async (item, token) => {
+  let data = new FormData();
+  data.append('id', item.id);
+  data.append('name', item.name);
+
   const config = {
     headers: {
       'content-type': 'multipart/form-data',

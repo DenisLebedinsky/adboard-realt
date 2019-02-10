@@ -3,46 +3,81 @@ var router = express.Router();
 var Category = require('../models/category').Category;
 
 /* GET */
-router.get('/', function(req, res, next) {
-    
+router.get('/', function (req, res, next) {
+
     Category.findall(function (err, category) {
-        if(err) return next(err);
-        res.send({category}) ;
+        if (err) return next(err);
+        res.send({category});
     });
 
 });
 
 /* POST */
-router.post('/',ensureAuthorized, function(req, res, next) {
+router.post('/', ensureAuthorized, function (req, res, next) {
     var category = new Category({
-        id:req.body.id,
-        name:req.body.name
+        id: req.body.id,
+        name: req.body.name
     });
- 
- category.save(function (err, category, affected) {
-     if (err) throw err;
-     res.statusCode = 200;
-     res.send('ok' );
- });
+
+    category.save(function (err, category, affected) {
+        if (err) throw err;
+        res.statusCode = 200;
+        res.send('ok');
+    });
 
 });
 
 /*delete*/
 router.delete('/', ensureAuthorized, function (req, res, next) {
 
-    Category.findOnList(req.body.id, function (err,data) {
+    Category.findOnList(req.body.id, function (err, data) {
         console.log(data)
-        if(err) return next(err);
-        if (data != undefined){
+        if (err) return next(err);
+        if (data != undefined) {
             data.remove();
             res.statusCode = 200;
             res.send('ok');
-        }else{
+        } else {
             res.statusCode = 400;
-            res.send({ error: 'Validation error' });
+            res.send({error: 'Validation error'});
         }
     })
 });
+
+
+router.patch('/update', ensureAuthorized, upload.any(), function (req, res) {
+    User.findOne({token: req.token}, function (err, user) {
+        if (err) {
+            res.json({
+                type: false,
+                data: "Error occured: " + err
+            });
+        } else {
+            if (user) {
+                try {
+                    var imgArray = [];
+                    for (var key in req.files) {
+                        imgArray.push('/uploads/' + req.files[key].filename)
+                    }
+                    Category.updateOne(
+                        {id: req.body.id},
+                        {name: req.body.name},
+                        (err, todo) => {
+                            if (err) return res.status(500).send(err);
+                            return res.send(todo);
+                        });
+
+                } catch (err) {
+                    // id not found
+                }
+            } else {
+                res.send(403)
+            }
+
+        }
+    });
+});
+
 
 function ensureAuthorized(req, res, next) {
     var bearerToken;

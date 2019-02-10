@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import OneCheckItem from './OneCheckItem';
 import { fetchItemsCheck } from './../../actions';
 import { getcheckItems, getToken } from './../../selectors';
-import EditCategory from './../Editcategory';
+import EditCategory from './../editcategory';
 
 class Check extends Component {
   componentDidMount() {
