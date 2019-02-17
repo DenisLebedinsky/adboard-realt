@@ -2,7 +2,7 @@ var createError = require('http-errors'),
     express = require('express'),
     path = require('path'),
     cookieParser = require('cookie-parser'),
-  logger = require('morgan'),
+    logger = require('morgan'),
 
     bodyParser = require('body-parser'),
     indexRouter = require('./routes/index'),

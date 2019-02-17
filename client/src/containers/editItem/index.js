@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { getItemById, getCategories } from './../../selectors';
+import { getItemById, getCategories, getToken } from './../../selectors';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import {
   fetchCategories,
   patchonServer,
@@ -113,10 +114,12 @@ class EditItem extends Component {
     };
     this.patchonServer(nItem, this.props.token);
     e.preventDefault();
+    browserHistory.push('/adboard');
   }
 
   handleDellItem() {
     this.delItem(this.state.id, this.props.token);
+    browserHistory.push('/adboard');
   }
 
   handleToggle = value => () => {
@@ -316,7 +319,7 @@ const mapStateToProps = state => {
   return {
     item: getItemById(state, state.itemPage.id),
     categores: getCategories(state),
-    token: sessionStorage.getItem('token'), //state.auth.token
+    token: getToken(state)
   };
 };
 

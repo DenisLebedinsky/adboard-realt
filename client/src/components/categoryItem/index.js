@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react';
 
 class CategoryItem extends PureComponent{
 
-    getDerivedStateFromProps(item,prevOriginalValue) {
+  static  getDerivedStateFromProps(item,prevOriginalValue) {
 
-        if (item.value !== prevOriginalValue) {
+        if (item.name !== prevOriginalValue) {
             return {
-                originalValue: item.value,
-                value
+                originalValue: item.name,
+                item
             };
         }
 
@@ -17,7 +17,7 @@ class CategoryItem extends PureComponent{
     constructor(props){
         super(props);
         this.state = {
-            value: this.props.item.value
+            value: this.props.item.name
         };
 
         this.onSave = this.onSave.bind(this);
@@ -29,12 +29,10 @@ class CategoryItem extends PureComponent{
 
         const { onSave, item } = this.props;
         const { value } = this.state;
-
         const id = item.id;
 
         if( typeof onSave === 'function' ){
-            onSave(value, id);
-            this.setState({value: this.props.item.value});
+            onSave(id, value);
         }
     }
 

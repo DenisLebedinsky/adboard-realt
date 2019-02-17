@@ -50,7 +50,9 @@ router.get('/more/:prev', function (req, res, next) {
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname) + '\\client\\public\\uploads\\')
+        var dirrectory = __dirname.split("/");
+        dirrectory.pop();
+        cb(null, path.join(dirrectory.join("/")+ '/client/public/uploads/'))
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + "_" + file.originalname)
@@ -60,7 +62,7 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage});
 
 router.post('/', upload.any(), function (req, res) {
-  console.log('yeee')
+
   try {
         var imgArray = [];
         for (var key in req.files) {
@@ -92,6 +94,7 @@ router.post('/', upload.any(), function (req, res) {
 });
 
 router.patch('/update', ensureAuthorized, upload.any(), function (req, res) {
+    console.log(123123)
     User.findOne({token: req.token}, function (err, user) {
         if (err) {
             res.json({
@@ -100,7 +103,7 @@ router.patch('/update', ensureAuthorized, upload.any(), function (req, res) {
             });
         } else {
             if (user) {
-                //___________________________
+                console.log(req.files)
                 try {
                     var imgArray = [];
                     for (var key in req.files) {
@@ -123,7 +126,7 @@ router.patch('/update', ensureAuthorized, upload.any(), function (req, res) {
                         });
 
                 } catch (err) {
-                    // res.send({ error: 'not save to database' });
+                     res.send(403);
                 }
                 // _________________________
             } else {
@@ -135,7 +138,6 @@ router.patch('/update', ensureAuthorized, upload.any(), function (req, res) {
 
 
 });
-
 
 router.patch('/changestatus', ensureAuthorized, upload.any(), function (req, res) {
     User.findOne({token: req.token}, function (err, user) {
@@ -171,7 +173,6 @@ router.patch('/changestatus', ensureAuthorized, upload.any(), function (req, res
 
 
 });
-
 
 function ensureAuthorized(req, res, next) {
     var bearerToken;

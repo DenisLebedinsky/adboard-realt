@@ -89,12 +89,6 @@ export const fetchItemByID = id => async dispatch => {
   }
 };
 
-export const addItemToBasket = id => dispatch => {
-  dispatch({
-    type: at.ADD_ITEM_TO_BASKET,
-    payload: id,
-  });
-};
 
 export const searchItem = text => async dispatch => {
   dispatch({ type: at.FETCH_ITEMS_SEARCH_START });
@@ -141,7 +135,6 @@ export const fetchCategories = () => async dispatch => {
 
 export const sendAdToServer = nitem => async dispatch => {
   dispatch({ type: at.UPLOAD_ITEMS_START });
-
   try {
     await sendAdToServerApi(nitem);
     dispatch({ type: at.UPLOAD_ITEMS_SUCCESS });
@@ -156,7 +149,6 @@ export const sendAdToServer = nitem => async dispatch => {
 
 export const patchonServer = (nitem, token) => async dispatch => {
   dispatch({ type: at.PATCH_ITEMS_START });
-
   try {
     await patchonServerApi(nitem, token);
     dispatch({ type: at.PATCH_ITEMS_SUCCESS });
@@ -171,7 +163,6 @@ export const patchonServer = (nitem, token) => async dispatch => {
 
 export const chekingItem = (id, token) => async dispatch => {
   dispatch({ type: at.CHECK_ITEMS_START });
-
   try {
     await chekingItemApi(id, token);
     dispatch({ type: at.CHECK_ITEMS_SUCCESS });
@@ -208,10 +199,18 @@ export const delItem = (id, token) => async dispatch => {
 
   try {
     const res = dellItemApi(id, token);
+    if(res === 200){
     dispatch({
       type: at.DEL_ITEMS_BY_ID_SUCCESS,
       payload: res,
     });
+    }else{
+      dispatch({
+        type: at.DEL_ITEMS_BY_ID_FAILURE,
+        payload: res,
+        error: true,
+      });
+    }
   } catch (err) {
     dispatch({
       type: at.DEL_ITEMS_BY_ID_FAILURE,

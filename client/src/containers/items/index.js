@@ -6,7 +6,6 @@ import OneItem from './oneitem';
 import {
   fetchItems,
   loadMoreItems,
-  addItemToBasket,
   fetchCategories,
 } from './../../actions';
 import { getItems } from './../../selectors';
@@ -50,7 +49,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = {
   fetchItems,
   loadMoreItems,
-  addItemToBasket,
   fetchCategories,
 };
 

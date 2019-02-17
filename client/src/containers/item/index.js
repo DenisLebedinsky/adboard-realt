@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchItemByID, addItemToBasket } from './../../actions';
+import { fetchItemByID } from './../../actions';
 import { getItemById } from './../../selectors';
 import { Sidebar } from './sidebar';
 import Field from './fields';
@@ -30,8 +30,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  fetchItemByID,
-  addItemToBasket,
+  fetchItemByID
 };
 
 export default connect(

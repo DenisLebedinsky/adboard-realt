@@ -4,12 +4,13 @@ import './style.css';
 class Field extends Component {
   constructor(props) {
     super(props);
-    Field.slide = Field.slide.bind(this);
+    this.slide = this.slide.bind(this);
   }
 
-  static slide(imgsrc) {
+  slide(imgsrc, index) {
+      const curClass = index === 0 ? "carousel-item active":"carousel-item";
     return (
-      <div className="carousel-item active">
+      <div className={curClass} key={index}>
         <img className="d-block w-100" src={imgsrc} alt={imgsrc} />
       </div>
     );
@@ -26,6 +27,7 @@ class Field extends Component {
           {this.props.item &&
             this.props.item.imgArr.map((data, index) => (
               <li
+                key={index}
                 data-target="#carouselExampleIndicators"
                 data-slide-to={index}
                 className={index === 0 ? 'active' : ''}
@@ -34,26 +36,22 @@ class Field extends Component {
         </ol>
         <div className="carousel-inner">
           {this.props.item &&
-            this.props.item.imgArr.map(imgsrc => Field.slide(imgsrc))}
+            this.props.item.imgArr.map((imgsrc, index) => this.slide(imgsrc, index))}
         </div>
-        <a
-          className="carousel-control-prev"
-          href="#carouselExampleIndicators"
-          role="button"
-          data-slide="prev"
-        >
-          <span className="carousel-control-prev-icon" aria-hidden="true" />
-          <span className="sr-only">Previous</span>
-        </a>
-        <a
-          className="carousel-control-next"
-          href="#carouselExampleIndicators"
-          role="button"
-          data-slide="next"
-        >
-          <span className="carousel-control-next-icon" aria-hidden="true" />
-          <span className="sr-only">Next</span>
-        </a>
+          <a className="carousel-control-prev"
+             href="#carouselExampleIndicators"
+             role="button"
+             data-slide="prev">
+              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span className="sr-only">Previous</span>
+          </a>
+          <a className="carousel-control-next"
+             href="#carouselExampleIndicators"
+             role="button"
+             data-slide="next" >
+              <span className="carousel-control-next-icon" aria-hidden="true"></span>
+              <span className="sr-only">Next</span>
+          </a>
       </div>
     );
   }

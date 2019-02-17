@@ -7,6 +7,8 @@ import {
     deleteCategory,
     updateCategory
 } from './../../actions'
+import categories from "../../reducers/categories";
+import {getCategories} from "../../selectors";
 
 class EditCategory extends PureComponent{
 
@@ -20,44 +22,40 @@ class EditCategory extends PureComponent{
 
     onAdd(value){
         const id = String(Date.now());
-        addCategory({id,value});
+       this.props.addCategory({id,value});
     }
 
     onSave(id,value){
-        updateCategory({id,value});
+        this.props.updateCategory({id,value});
     }
 
     onDelete(id){
-        deleteCategory(id);
+        this.props.deleteCategory(id);
     }
 
     render(){
 
-        const { items }= this.props;
-
         return (
             <div>
                 <CategoryForm onAdd={this.onAdd}/>
-                {items && items.map(item =>{
-                    <CategoryItem
-                        item={item}
-                        onSave={this.onSave}
-                        onDelete={this.onDelete}
-                    />
-                })}
+                {this.props.items && this.props.items.map(item => <CategoryItem key={item.id} item={item} onSave={this.onSave} onDelete={this.onDelete} />)}
             </div>
         )
     }
 }
 
 const mapStateToProps = state =>{
-    items:state.categorys;
+    return {
+        items: getCategories(state)
+    }
 };
 const mapDispatchToProps ={
-
+    addCategory,
+    deleteCategory,
+    updateCategory
 };
 
 export default connect(
-    null,
-    null
+    mapStateToProps,
+    mapDispatchToProps
     )(EditCategory)

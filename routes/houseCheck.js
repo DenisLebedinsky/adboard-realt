@@ -33,6 +33,7 @@ router.delete('/del/:id',ensureAuthorized, function (req, res){
                 data: "Error occured: " + err
             });
         } else {
+
             if(user){
                 House.findOnList(req.params.id, function (err, docs) {
                     if(err) throw( err);

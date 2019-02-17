@@ -45,7 +45,8 @@ router.delete('/', ensureAuthorized, function (req, res, next) {
 });
 
 
-router.patch('/update', ensureAuthorized, upload.any(), function (req, res) {
+router.patch('/', ensureAuthorized, function (req, res) {
+    console.log(req.token)
     User.findOne({token: req.token}, function (err, user) {
         if (err) {
             res.json({
@@ -55,10 +56,6 @@ router.patch('/update', ensureAuthorized, upload.any(), function (req, res) {
         } else {
             if (user) {
                 try {
-                    var imgArray = [];
-                    for (var key in req.files) {
-                        imgArray.push('/uploads/' + req.files[key].filename)
-                    }
                     Category.updateOne(
                         {id: req.body.id},
                         {name: req.body.name},

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import OneCheckItem from './OneCheckItem';
 import { fetchItemsCheck } from './../../actions';
 import { getcheckItems, getToken } from './../../selectors';
-import EditCategory from './../editcategory';
+import EditCategory from '../editCategory';
 
 class Check extends Component {
   componentDidMount() {
@@ -13,7 +13,7 @@ class Check extends Component {
   render() {
     const { items } = this.props;
     return (
-      <div>
+      <div className="container">
         <div className="books row">
           {items.map((item, index) => (
             <OneCheckItem item={item} key={index} />

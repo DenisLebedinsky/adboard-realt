@@ -56,7 +56,7 @@ export const sendAdToServerApi = async nitem => {
   data.append('categoryId', nitem.categoryId);
   data.append('email', nitem.email);
   data.append('tel', nitem.tel);
-
+console.log('go')
   const config = {
     headers: {
       'content-type': 'multipart/form-data',
@@ -85,6 +85,8 @@ export const patchonServerApi = async (nitem, token) => {
   };
   axios.patch('/house/update', data, config);
 };
+
+
 export const fetchAuthApi = async (username, password) => {
   return fetch('/users/authenticate', {
     method: 'POST',
@@ -107,18 +109,16 @@ export const fetchAuthApi = async (username, password) => {
   */
 };
 export const dellItemApi = async (id, token) => {
-  return fetch(`/house/del/${id}`, {
-    method: 'Delete',
+  const url = '/houseCheck/del/'+id;
+  const config = {
     headers: {
       'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
       authorization: token,
-    },
-  }).then(response =>
-    response.json().then(json => {
-      return json;
-    })
-  );
-};
+    }
+  };
+
+  return axios.delete(url, config);
+  };
 
 export const chekingItemApi = async (id, token) => {
   let data = new FormData();
@@ -161,8 +161,9 @@ export const categoryDeleteApi = async (id, token) => {
 
 export const categoryUpdateApi = async (item, token) => {
   let data = new FormData();
+  console.log(item)
   data.append('id', item.id);
-  data.append('name', item.name);
+  data.append('name', item.value);
 
   const config = {
     headers: {
@@ -170,5 +171,5 @@ export const categoryUpdateApi = async (item, token) => {
       authorization: token,
     },
   };
-  axios.delete('/category', data, config);
+  axios.patch('/category', data, config);
 };
