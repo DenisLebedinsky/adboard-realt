@@ -7,6 +7,7 @@ import * as R from 'ramda';
 import Gallery from 'react-grid-gallery';
 import InputMask from 'react-input-mask';
 import './style.css';
+import { browserHistory } from 'react-router';
 
 class AddItems extends Component {
   constructor(props) {
@@ -83,7 +84,7 @@ class AddItems extends Component {
       tel: this.state.tel,
     };
     this.sendAdToServer(nItem);
-
+    browserHistory.push('/adboard');
   }
 
   handleChangeTel(e) {

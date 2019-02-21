@@ -136,8 +136,11 @@ export const fetchCategories = () => async dispatch => {
 export const sendAdToServer = nitem => async dispatch => {
   dispatch({ type: at.UPLOAD_ITEMS_START });
   try {
-    await sendAdToServerApi(nitem);
+    let res = await sendAdToServerApi(nitem);
+    console.log('respons',res)
+    //if(res = 201){alert('Объявление добавлено!')}
     dispatch({ type: at.UPLOAD_ITEMS_SUCCESS });
+
   } catch (err) {
     dispatch({
       type: at.UPLOAD_ITEMS_FAILURE,
@@ -184,7 +187,7 @@ export const fetchAuth = (username, password) => async dispatch => {
       type: at.FETCH_AUTH_SUCCESS,
       payload: token,
     });
-    sessionStorage.setItem('token', token);
+    sessionStorage.setItem('token', token.token);
   } catch (err) {
     dispatch({
       type: at.FETCH_AUTH_FAILURE,
@@ -225,11 +228,11 @@ export const signOut = () => dispatch => {
   sessionStorage.setItem('token', '');
 };
 
-export const addCategory = (id, token) => async dispatch => {
+export const addCategory = (category, token) => async dispatch => {
   dispatch({ type: at.ADD_CATEGORY_START});
 
   try {
-    const res = categoryAddApi(id, token);
+    const res = categoryAddApi(category, token);
     dispatch({
       type: at.ADD_CATEGORY_SUCCESS,
       payload: res,
@@ -244,11 +247,11 @@ export const addCategory = (id, token) => async dispatch => {
 };
 
 
-export const deleteCategory = (item, token) => async dispatch => {
+export const deleteCategory = (id, token) => async dispatch => {
   dispatch({ type: at.DEL_ITEMS_BY_ID_START});
 
   try {
-    const res = categoryDeleteApi(item, token);
+    const res = categoryDeleteApi(id, token);
     dispatch({
       type: at.DEL_ITEMS_BY_ID_SUCCESS,
       payload: res,
@@ -263,11 +266,11 @@ export const deleteCategory = (item, token) => async dispatch => {
 };
 
 
-export const updateCategory = (item, token) => async dispatch => {
+export const updateCategory = (category, token) => async dispatch => {
   dispatch({ type: at.UPDATE_CATEGORY_STAT });
 
   try {
-    const res = categoryUpdateApi(item, token);
+    const res = categoryUpdateApi(category, token);
     dispatch({
       type: at.UPDATE_CATEGORY_SUCCESS,
       payload: res,

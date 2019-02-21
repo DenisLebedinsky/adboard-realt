@@ -1,7 +1,6 @@
 import { FETCH_AUTH_SUCCESS, CLEAR_TOKEN } from './../actionTypes';
 
-const ssToken =
-  sessionStorage.getItem('token') !== '' ? sessionStorage.getItem('token') : '';
+const ssToken = sessionStorage.getItem('token') !== '' ? sessionStorage.getItem('token') : '';
 
 const initialState = {
   token: ssToken,

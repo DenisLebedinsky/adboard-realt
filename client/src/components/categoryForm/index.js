@@ -11,8 +11,8 @@ class CategoryForm extends PureComponent{
         this.changeValue = this.changeValue.bind(this);
     }
 
-    onAdd(){
-
+    onAdd(e){
+        e.preventDefault();
         const { onAdd } = this.props;
         const { value } = this.state;
 
@@ -34,9 +34,14 @@ class CategoryForm extends PureComponent{
         const { value } = this.state;
 
         return(
-            <form onSubmit={this.onAdd}>
-                <input value={value} onChange={this.changeValue}/>
-                <button>Добавить</button>
+            <form onSubmit={this.onAdd} className="input-group mb-3 ">
+                <input type="text"
+                       className="form-control"
+                       value={value}
+                       onChange={this.changeValue}/>
+            <div className="input-group-append">
+                <button className="btn btn-outline-secondary">Добавить</button>
+            </div>
             </form>
         )
     }

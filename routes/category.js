@@ -14,9 +14,10 @@ router.get('/', function (req, res, next) {
 
 /* POST */
 router.post('/', ensureAuthorized, function (req, res, next) {
-    var category = new Category({
+
+   var category = new Category({
         id: req.body.id,
-        name: req.body.name
+        name: req.body.value
     });
 
     category.save(function (err, category, affected) {
@@ -46,8 +47,11 @@ router.delete('/', ensureAuthorized, function (req, res, next) {
 
 
 router.patch('/', ensureAuthorized, function (req, res) {
+    
     console.log(req.token)
+
     User.findOne({token: req.token}, function (err, user) {
+       console.log('12313', user)
         if (err) {
             res.json({
                 type: false,
@@ -55,6 +59,8 @@ router.patch('/', ensureAuthorized, function (req, res) {
             });
         } else {
             if (user) {
+                
+                console.log('1111')
                 try {
                     Category.updateOne(
                         {id: req.body.id},

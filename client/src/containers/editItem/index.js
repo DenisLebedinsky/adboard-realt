@@ -114,12 +114,12 @@ class EditItem extends Component {
     };
     this.patchonServer(nItem, this.props.token);
     e.preventDefault();
-    browserHistory.push('/adboard');
+    browserHistory.push('/check');
   }
 
   handleDellItem() {
     this.delItem(this.state.id, this.props.token);
-    browserHistory.push('/adboard');
+    browserHistory.push('/check');
   }
 
   handleToggle = value => () => {

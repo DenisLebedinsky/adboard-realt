@@ -13,8 +13,8 @@ class Check extends Component {
   render() {
     const { items } = this.props;
     return (
-      <div className="container">
-        <div className="books row">
+      <div className="container mt-5">
+        <div className="books row pt-2">
           {items.map((item, index) => (
             <OneCheckItem item={item} key={index} />
           ))}

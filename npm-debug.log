@@ -7,7 +7,7 @@
 6 silly lifecycle api-houselist@0.0.0~preserver: no script for preserver, continuing
 7 info lifecycle api-houselist@0.0.0~server: api-houselist@0.0.0
 8 verbose lifecycle api-houselist@0.0.0~server: unsafe-perm in lifecycle true
-9 verbose lifecycle api-houselist@0.0.0~server: PATH: /usr/share/npm/bin/node-gyp-bin:/home/den/Документы/adrealt/node_modules/.bin:/home/den/Документы/adrealt/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+9 verbose lifecycle api-houselist@0.0.0~server: PATH: /usr/share/npm/bin/node-gyp-bin:/home/den/Документы/adrealt/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 10 verbose lifecycle api-houselist@0.0.0~server: CWD: /home/den/Документы/adrealt
 11 silly lifecycle api-houselist@0.0.0~server: Args: [ '-c', 'node ./bin/www' ]
 12 silly lifecycle api-houselist@0.0.0~server: Returned: code: 1  signal: null

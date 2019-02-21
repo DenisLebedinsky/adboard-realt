@@ -57,11 +57,13 @@ class CategoryItem extends PureComponent{
         const { value } = this.state;
 
         return(
-            <li>
-                <input value={value} onChange={this.changeValue}/>
-                <button onClick={this.onSave}>Сохранить</button>
-                <button onClick={this.onDelete}>Удалить</button>
-            </li>
+            <div className="input-group mb-3">
+                <input value={value} onChange={this.changeValue} className="form-control"/>
+                <div className="input-group-append">
+                    <button className="input-group-text" onClick={this.onSave}>Сохранить</button>
+                    <button className="input-group-text" onClick={this.onDelete}>Удалить</button>
+                </div>
+            </div>
         )
     }
 

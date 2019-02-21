@@ -489,6 +489,9 @@ nav.navbar-inverse .navbar-nav > li > a.Active {
   border-radius: 4px;
 }
 
+.card-img-top{
+  height: 200px;
+}
 .caption {
   height: 130px;
   overflow: hidden;

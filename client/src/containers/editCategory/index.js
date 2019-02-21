@@ -5,10 +5,10 @@ import CategoryItem from '../../components/categoryItem'
 import {
     addCategory,
     deleteCategory,
-    updateCategory
+    updateCategory,
+    fetchCategories
 } from './../../actions'
-import categories from "../../reducers/categories";
-import {getCategories} from "../../selectors";
+import {getCategories, getToken} from "../../selectors";
 
 class EditCategory extends PureComponent{
 
@@ -21,24 +21,51 @@ class EditCategory extends PureComponent{
     }
 
     onAdd(value){
+
         const id = String(Date.now());
-       this.props.addCategory({id,value});
+        const {token} = this.props;
+        
+       this.props.addCategory({id:id,value:value},token);
+       this.props.fetchCategories();
     }
 
     onSave(id,value){
-        this.props.updateCategory({id,value});
+
+        const {token} = this.props;
+
+        this.props.updateCategory({id,value},token);
     }
 
     onDelete(id){
-        this.props.deleteCategory(id);
+       
+        const {token} = this.props;
+       
+        this.props.deleteCategory(id,token);
+    }
+
+    componentDidMount() {
+        if(this.props.items && this.props.items.length === 0 ){
+            this.props.fetchCategories();
+        }
     }
 
     render(){
 
         return (
-            <div>
+            <div className="d-flex flex-column justify-content-center mt-4">
+                <div className="col-md-6">
+                    <h2>Категории</h2>
                 <CategoryForm onAdd={this.onAdd}/>
-                {this.props.items && this.props.items.map(item => <CategoryItem key={item.id} item={item} onSave={this.onSave} onDelete={this.onDelete} />)}
+                {this.props.items && this.props.items.map(item =>{
+                    return(
+                        <CategoryItem
+                            key={item.id}
+                            item={item}
+                            onSave={this.onSave}
+                            onDelete={this.onDelete}
+                        />)}
+                )}
+                </div>
             </div>
         )
     }
@@ -46,13 +73,15 @@ class EditCategory extends PureComponent{
 
 const mapStateToProps = state =>{
     return {
-        items: getCategories(state)
+        items: getCategories(state),
+        token: getToken(state)
     }
 };
 const mapDispatchToProps ={
     addCategory,
     deleteCategory,
-    updateCategory
+    updateCategory,
+    fetchCategories
 };
 
 export default connect(

@@ -97,17 +97,8 @@ export const fetchAuthApi = async (username, password) => {
   })
     .then(res => res.json())
     .then(data => data);
-  /*axios.post('/users/authenticate',{username,password})
-    .then(function (response) {
-      // handle success
-
-    })
-      .catch(function (error) {
-          // handle error
-
-      })
-  */
 };
+
 export const dellItemApi = async (id, token) => {
   const url = '/houseCheck/del/'+id;
   const config = {
@@ -132,44 +123,41 @@ export const chekingItemApi = async (id, token) => {
   axios.patch('/house/changestatus', data, config);
 };
 
+
 export const categoryAddApi = async (category, token) => {
-  let data = new FormData();
-  data.append('id', category.id);
-  data.append('id', category.name);
+  
+  const body= JSON.stringify(category);
 
   const config = {
     headers: {
-      'content-type': 'multipart/form-data',
-      authorization: token,
-    },
+      'Content-type': 'application/json',
+      authorization: token
+    }
   };
-  axios.post('/category', data, config);
+  axios.post('/category',body, config);
 };
 
 export const categoryDeleteApi = async (id, token) => {
-  let data = new FormData();
-  data.append('id', id);
-
+  
   const config = {
     headers: {
-      'content-type': 'multipart/form-data',
+      'Content-type': 'application/json',
       authorization: token,
     },
   };
-  axios.delete('/category', data, config);
+  axios.delete('/category', {'id':id}, config);
 };
 
-export const categoryUpdateApi = async (item, token) => {
-  let data = new FormData();
-  console.log(item)
-  data.append('id', item.id);
-  data.append('name', item.value);
+
+export const categoryUpdateApi = async (category, token) => {
+  
+  const body= JSON.stringify(category);
 
   const config = {
     headers: {
-      'content-type': 'multipart/form-data',
-      authorization: token,
-    },
+      'Content-type': 'application/json',
+      authorization: token
+    }
   };
-  axios.patch('/category', data, config);
+  axios.patch('/category',body, config);
 };
