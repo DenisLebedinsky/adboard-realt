@@ -2,7 +2,7 @@
  var jwt = require('jsonwebtoken');
 
  var username = "Vladimir",
-     password = "94021",
+     password = "99999",
      email = "mir-zakona@mail.ru";
 
  User.registration( 

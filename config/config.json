@@ -4,7 +4,7 @@
     "uri":"mongodb://localhost/house"
   },
   "session":{
-    "secret": "VovaVovatiMoguch",
+    "secret": "d3j23jhjhd23",
     "key":"sid",
     "secure": true,
     "cookie":{
