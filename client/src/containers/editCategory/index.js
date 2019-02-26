@@ -3,88 +3,122 @@ import { connect } from 'react-redux';
 import CategoryForm from '../../components/categoryForm'
 import CategoryItem from '../../components/categoryItem'
 import {
-    addCategory,
-    deleteCategory,
-    updateCategory,
-    fetchCategories
+	addCategory,
+	deleteCategory,
+	updateCategory,
+	fetchCategories
 } from './../../actions'
-import {getCategories, getToken} from "../../selectors";
+import { getCategories, getToken } from "../../selectors";
 
-class EditCategory extends PureComponent{
+class EditCategory extends PureComponent {
 
-    constructor(props){
-        super(props);
+	static getDerivedStateFromProps({ items }, { prevOriginalItems }) {
 
-        this.onAdd =this.onAdd.bind(this);
-        this.onSave =this.onSave.bind(this);
-        this.onDelete =this.onDelete.bind(this);
-    }
+		if (items !== prevOriginalItems) {
+			return {
+				prevOriginalItems: items,
+				items
+			};
+		}
 
-    onAdd(value){
+		return null;
+	}
 
-        const id = String(Date.now());
-        const {token} = this.props;
-        
-       this.props.addCategory({id:id,value:value},token);
-       this.props.fetchCategories();
-    }
+	constructor(props) {
+		super(props);
 
-    onSave(id,value){
+		const { items } = this.props;
 
-        const {token} = this.props;
+		this.state = {
+			items: items,
+			prevOriginalItems: items
+		}
 
-        this.props.updateCategory({id,value},token);
-    }
+		this.onAdd = this.onAdd.bind(this);
+		this.onSave = this.onSave.bind(this);
+		this.onDelete = this.onDelete.bind(this);
+	}
 
-    onDelete(id){
-       
-        const {token} = this.props;
-       
-        this.props.deleteCategory(id,token);
-    }
+	onAdd(value) {
 
-    componentDidMount() {
-        if(this.props.items && this.props.items.length === 0 ){
-            this.props.fetchCategories();
-        }
-    }
+		const id = String(Date.now());
+		const { token } = this.props;
 
-    render(){
+		this.props.addCategory({ id: id, name: value }, token);
 
-        return (
-            <div className="d-flex flex-column justify-content-center mt-4">
-                <div className="col-md-6">
-                    <h2>Категории</h2>
-                <CategoryForm onAdd={this.onAdd}/>
-                {this.props.items && this.props.items.map(item =>{
-                    return(
-                        <CategoryItem
-                            key={item.id}
-                            item={item}
-                            onSave={this.onSave}
-                            onDelete={this.onDelete}
-                        />)}
-                )}
-                </div>
-            </div>
-        )
-    }
+		let newItems = this.state.items.slice()
+		newItems.push({id:id, name:value})
+
+		this.setState({items:newItems})
+	}
+
+	onSave(id, value) {
+
+		const { token } = this.props;
+		const name = value;
+		this.props.updateCategory({ id, name }, token);
+	}
+
+	onDelete(id) {
+
+		const { token } = this.props;
+		const { items } = this.state;
+
+ 		this.props.deleteCategory(id, token);
+
+		let newItems = items.slice();
+		newItems.splice(newItems.findIndex(e => e.id === id), 1)
+		this.setState({ items: newItems })
+	}
+
+	componentDidMount() {
+
+		const { items } = this.props;
+
+		if (items && items.length === 0) {
+			this.props.fetchCategories();
+		}
+	}
+
+	render() {
+
+		const { items } = this.state;
+
+		return (
+			<div className="d-flex flex-column justify-content-center mt-4">
+				<div className="col-md-6">
+					<h2>Категории</h2>
+					<CategoryForm onAdd={this.onAdd} />
+					{items && items.map(item => {
+						return (
+							<CategoryItem
+								key={item.id}
+								item={item}
+								onSave={this.onSave}
+								onDelete={this.onDelete}
+							/>)
+					}
+					)}
+				</div>
+			</div>
+		)
+	}
 }
 
-const mapStateToProps = state =>{
-    return {
-        items: getCategories(state),
-        token: getToken(state)
-    }
+const mapStateToProps = state => {
+	return {
+		items: getCategories(state),
+		token: getToken(state)
+	}
 };
-const mapDispatchToProps ={
-    addCategory,
-    deleteCategory,
-    updateCategory,
-    fetchCategories
+const mapDispatchToProps = {
+	addCategory,
+	deleteCategory,
+	updateCategory,
+	fetchCategories
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-    )(EditCategory)
+	mapStateToProps,
+	mapDispatchToProps
+)(EditCategory)
