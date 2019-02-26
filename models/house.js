@@ -35,8 +35,7 @@ const schema = new Schema({
 		type: Number
 	},
 	image: {
-		type: String,
-		unique: false
+		type: String
 	},
 	imgArr: [
 		{

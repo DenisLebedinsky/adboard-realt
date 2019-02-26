@@ -70,25 +70,27 @@ router.post('/', upload.any(), function (req, res) {
 			imgArray.push('/uploads/' + req.files[key].filename)
 		}
 		var id = Math.floor(Math.random() * 100000000);
-		var house = new House({
-			id: id,
-			categoryId: (req.body.categoryId !== '' ? req.body.categoryId : 0),
-			name: req.body.name,
-			email: (req.body.email !== undefined ? req.body.email : ''),
-			tel: (req.body.tel !== undefined ? req.body.tel : 0),
-			description: req.body.description,
-			price: req.body.price,
-			image: (imgArray.length !== 0 ? imgArray[0] : ''),
-			imgArr: imgArray,
-			status: false
+		if (req.body.categoryId && req.body.name && req.body.description) {
+			var house = new House({
+				id: id,
+				categoryId: req.body.categoryId,
+				name: req.body.name,
+				email: req.body.email,
+				tel: req.body.tel,
+				description: req.body.description,
+				price: req.body.price,
+				image: (imgArray.length > 0 ? imgArray[0] : ''),
+				imgArr: imgArray,
+				status: false
+			});
 
-		});
-
-		house.save(function (err, house, affected) {
-			if (err) throw err;
-		});
-		res.statusCode = 201;
-		res.send({ error: 'create in database' });
+			house.save(function (err, house, affected) {
+				if (err) throw err;
+			});
+			res.status(201).send({ error: 'create in database' });
+		}else {
+			res.status(206);
+		}
 	} catch (err) {
 		res.status(500).send(err);
 	}
@@ -105,7 +107,7 @@ router.patch('/update', ensureAuthorized, upload.any(), function (req, res) {
 			});
 		} else {
 			if (user) {
-			
+
 				try {
 					var imgArray = [];
 					for (var key in req.files) {

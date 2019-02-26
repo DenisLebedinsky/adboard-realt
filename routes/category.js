@@ -26,17 +26,17 @@ router.post('/', ensureAuthorized, function (req, res, next) {
 		} else {
 			if (user) {
 				try {
+					if (req.body.id && req.body.name) {
+						var category = new Category({
+							id: req.body.id,
+							name: req.body.name
+						});
 
-					var category = new Category({
-						id: req.body.id,
-						name: req.body.value
-					});
-
-					category.save(function (err, category, affected) {
-						if (err) throw err;
-						res.status(201).send('ok');
-					});
-
+						category.save(function (err, category, affected) {
+							if (err) throw err;
+							res.status(201).send('ok');
+						});
+					}
 				} catch (err) {
 					res.status(500);
 				}
@@ -64,7 +64,7 @@ router.delete('/:id', ensureAuthorized, function (req, res, next) {
 				try {
 
 					Category.findOnList(req.params.id, function (err, data) {
-						
+
 						if (err) return next(err);
 						if (data != undefined) {
 							data.remove();
@@ -98,7 +98,7 @@ router.patch('/', ensureAuthorized, function (req, res) {
 			});
 		} else {
 			if (user) {
-				try {			
+				try {
 					Category.updateOne(
 						{ id: req.body.id },
 						{ name: req.body.name },
