@@ -35,7 +35,7 @@
   background-position: center;
 }
 
-.file-upload input[type='file'] {
+.fileInput[type='file'] {
   display: none; /* Обязательно скрываем настоящий Input File */
 }
 
