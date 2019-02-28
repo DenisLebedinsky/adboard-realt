@@ -122,14 +122,14 @@ class AddItems extends Component {
 		return (
 			<div className="container mt-5 pt-5 text-center">
 				<h1>Добавление нового объявления</h1>
-			
-        <div className="row add_item_container">
+
+				<div className="row add_item_container">
 					<form className="col-lg-12" onSubmit={e => this.handleSubmit(e)}>
 						<div className="form-group row">
 
 							<div className="col-md-6">
 								<h5>Фото:</h5>
-								
+
 								<div className="previewComponent">
 									{(Array.isArray(IMAGES) && IMAGES.length !== 0) &&
 										(<Gallery images={IMAGES} enableImageSelection={false} />)}
@@ -155,83 +155,80 @@ class AddItems extends Component {
 								</div>
 							</div>
 
-	
-							<div className="col-md-6">
-									<h5>Заполните данными форму:</h5>
-								<div className="input-group mb-2">
-									<div className="input-group-prepend">
-										<span className="input-group-text">Название</span>
+							<div className="col-md-6 text-left">
+								<h5>Заполните данными форму:</h5>
+								<div className="form-group row mt-2">
+									<label for="inputName" class="col-sm-2 col-form-label">Название</label>
+									<div class="col-sm-10">
+										<input
+											type="text"
+											className="form-control"
+											onChange={e => this.handleChangeName(e)}
+											id="inputName"
+										/>
 									</div>
-									<input
-										type="text"
-										className="form-control"
-										onChange={e => this.handleChangeName(e)}
-										id="inputName"
-									/>
 								</div>
-
-								<div className="input-group mb-2">
-									<div className="input-group-prepend">
-										<span className="input-group-text">Описание</span>
+								<div className="form-group row mt-2">
+									<label for="Description" class="col-sm-2 col-form-label">Описание</label>
+									<div className="col-sm-10">
+										<textarea
+											className="form-control"
+											rows="3"
+											id="Description"
+											onChange={e => this.handleChangeDescription(e)}
+										/>
 									</div>
-									<textarea
-										className="form-control"
-										rows="3"
-										onChange={e => this.handleChangeDescription(e)}
-									/>
 								</div>
-
-								<div className="input-group mb-2">
-									<div className="input-group-prepend">
-										<span className="input-group-text">Цена</span>
+								<div className="form-group row mt-2">
+									<label for="inputPrice" class="col-sm-2 col-form-label">Цена</label>
+									<div className="col-sm-10">
+										<input
+											type="number"
+											className="form-control"
+											id="inputPrice"
+											onChange={e => this.handleChangePrice(e)}
+										/>
 									</div>
-									<input
-										type="number"
-										className="form-control"
-										id="inputPrice"
-										onChange={e => this.handleChangePrice(e)}
-									/>
 								</div>
-
-								<div className="input-group mb-2">
-									<div className="input-group-prepend">
-										<span className="input-group-text">E-mail</span>
+								<div className="form-group row mt-2">
+									<label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+									<div className="col-sm-10">
+										<input
+											type="email"
+											className="form-control"
+											id="inputEmail"
+											onChange={e => this.handleChangeEmail(e)}
+										/>
 									</div>
-									<input
-										type="email"
-										className="form-control"
-										id="inputPrice"
-										onChange={e => this.handleChangeEmail(e)}
-									/>
 								</div>
-
-								<div className="input-group mb-2">
-									<div className="input-group-prepend">
-										<span className="input-group-text">Телефон</span>
+								<div className="form-group row mt-2">
+									<label for="phone" className="col-sm-2 col-form-label">Телефон</label>
+									<div className="col-sm-10">
+										<InputMask
+											mask="+7 (999) 999-99-99"
+											value={this.state.tel}
+											onChange={e => this.handleChangeTel(e)}
+											className="form-control"
+											id="phone"
+										/>
 									</div>
-
-									<InputMask
-										mask="+7 (999) 999-99-99"
-										value={this.state.tel}
-										onChange={e => this.handleChangeTel(e)}
-										className="form-control"
-									/>
 								</div>
-								<div className="input-group mb-2">
-									<div className="input-group-prepend">
-										<span className="input-group-text">Категория</span>
+								<div className="form-group row mt-2">
+									<label for="select" className="col-sm-2 col-form-label">Категория</label>
+									<div className="col-sm-10">
+										<select
+											className="form-control"
+											onChange={e => this.handleChangeCategories(e)}
+											value={this.state.categoriesid}
+											id="select"
+										>
+											{this.props.categores.map(data => (
+												<option key={data.id} value={data.id}>
+													{data.name}
+												</option>
+											))}
+										</select>
 									</div>
-									<select
-										className="form-control"
-										onChange={e => this.handleChangeCategories(e)}
-										value={this.state.categoriesid}
-									>
-										{this.props.categores.map(data => (
-											<option key={data.id} value={data.id}>
-												{data.name}
-											</option>
-										))}
-									</select>
 								</div>
 								<button
 									type="submit"
